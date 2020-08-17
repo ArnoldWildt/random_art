@@ -2,14 +2,15 @@ from PIL import Image
 from math_functions import *
 import numpy as np
 import math
+import sys
 
 
 def create_canvas(expr, size, is_str):
-    # canvasWidth = 2 * size
-    # canvas = Image.new("L", (canvasWidth, canvasWidth))
     canvas = np.zeros((size, size, 1), dtype='uint8')
+
     for px in range(size):
         for py in range(size):
+
             # Normalize to (-1 - 1)
             x = float(px - (size / 2)) / (size / 2)
             y = -float(py - (size / 2)) / (size / 2)
@@ -20,8 +21,15 @@ def create_canvas(expr, size, is_str):
                 z = expr.eval(x, y)
 
             # Scale to (0 - 255).
-            intensity = int(z * 127.5 + 127.5)
-            canvas[px][py] = intensity
+            intensity = z * 127.5 + 127.5
+
+            # TODO: Needs rework. Intensity gets to big.
+            if intensity > 2**30:
+                intensity = 2**30
+            if intensity < -2**30:
+                intensity = -2**30
+
+            canvas[px][py] = int(intensity)
 
     return np.rot90(canvas, k=3)
 
