@@ -1,6 +1,6 @@
 import argparse
 from datetime import date
-
+import time
 from expr_functions import build_expr
 from image_plot import plot_image
 
@@ -19,7 +19,11 @@ def create_images(num=1, prob=0.99, size=150, file_path=None):
 
     saved_strings = []
 
+    start_time = time.time()
+
     for i in range(num):
+        image_time = time.time()
+
         red_expr = build_expr(prob)
         green_expr = build_expr(prob)
         blue_expr = build_expr(prob)
@@ -27,6 +31,12 @@ def create_images(num=1, prob=0.99, size=150, file_path=None):
         image = plot_image(red_expr, green_expr, blue_expr, size)
         image.save(f"./images/image{i}.png")
         saved_strings.append([red_expr, green_expr, blue_expr])
+
+        image_time = round(time.time() - image_time, 2)
+        print(f"image{i}.png created! It took {image_time} secs")
+
+    total_time = round(time.time() - start_time, 2)
+    print(f"Done created {num} images! It took {total_time} secs")
 
     save_expr_file(saved_strings)
 

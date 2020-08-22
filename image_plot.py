@@ -23,12 +23,6 @@ def create_canvas(expr, size, is_str):
             # Scale to (0 - 255).
             intensity = z * 127.5 + 127.5
 
-            # TODO: Needs rework. Intensity gets to big.
-            if intensity > 2**30:
-                intensity = 2**30
-            if intensity < -2**30:
-                intensity = -2**30
-
             canvas[px][py] = int(intensity)
 
     return np.rot90(canvas, k=3)

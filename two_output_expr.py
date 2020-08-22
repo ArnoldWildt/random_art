@@ -12,7 +12,9 @@ class Product:
         return f"({self.expr_1} * {self.expr_2})"
 
     def eval(self, x, y):
-        return self.expr_1.eval(x, y) * self.expr_2.eval(x, y)
+        self._expr_1 = normelize(self.expr_1.eval(x, y))
+        self._expr_2 = normelize(self.expr_2.eval(x, y))
+        return self._expr_1 * self._expr_2
 
 
 class Quotient:
@@ -24,7 +26,9 @@ class Quotient:
         return f"quotient({self.expr_1}, {self.expr_2})"
 
     def eval(self, x, y):
-        return quotient(self.expr_1.eval(x, y), self.expr_2.eval(x, y))
+        self._expr_1 = normelize(self.expr_1.eval(x, y))
+        self._expr_2 = normelize(self.expr_2.eval(x, y))
+        return quotient(self._expr_1, self._expr_2)
 
 
 class Modulo:
@@ -36,7 +40,9 @@ class Modulo:
         return f"modulo({self.expr_1}, {self.expr_2})"
 
     def eval(self, x, y):
-        return modulo(self.expr_1.eval(x, y), self.expr_2.eval(x, y))
+        self._expr_1 = normelize(self.expr_1.eval(x, y))
+        self._expr_2 = normelize(self.expr_2.eval(x, y))
+        return modulo(self._expr_1, self._expr_2)
 
 
 class Sum:
@@ -48,7 +54,9 @@ class Sum:
         return f"({self.expr_1} + {self.expr_2})"
 
     def eval(self, x, y):
-        return self.expr_1.eval(x, y) + self.expr_2.eval(x, y)
+        self._expr_1 = normelize(self.expr_1.eval(x, y))
+        self._expr_2 = normelize(self.expr_2.eval(x, y))
+        return self._expr_1 + self._expr_2
 
 
 class Avg:
@@ -60,7 +68,9 @@ class Avg:
         return f"avg({self.expr_1}, {self.expr_2})"
 
     def eval(self, x, y):
-        return avg(self.expr_1.eval(x, y), self.expr_2.eval(x, y))
+        self._expr_1 = normelize(self.expr_1.eval(x, y))
+        self._expr_2 = normelize(self.expr_2.eval(x, y))
+        return avg(self._expr_1, self._expr_2)
 
 
 #################
@@ -79,8 +89,11 @@ class Level:
         return f"level({self.expr_1}, {self.expr_2}, {self.expr_3}, {self.rnd_f})"
 
     def eval(self, x, y):
-        return level(self.expr_1.eval(x, y), self.expr_2.eval(x, y),
-                     self.expr_3.eval(x, y), self.rnd_f)
+        self._expr_1 = normelize(self.expr_1.eval(x, y))
+        self._expr_2 = normelize(self.expr_2.eval(x, y))
+        self._expr_3 = normelize(self.expr_3.eval(x, y))
+        return level(self._expr_1, self._expr_2,
+                     self._expr_3, self.rnd_f)
 
 
 class Mix:
@@ -93,5 +106,8 @@ class Mix:
         return f"mix({self.expr_1}, {self.expr_2}, {self.expr_3})"
 
     def eval(self, x, y):
-        return mix(self.expr_1.eval(x, y), self.expr_2.eval(x, y),
-                   self.expr_3.eval(x, y))
+        self._expr_1 = normelize(self.expr_1.eval(x, y))
+        self._expr_2 = normelize(self.expr_2.eval(x, y))
+        self._expr_3 = normelize(self.expr_3.eval(x, y))
+        return mix(self._expr_1, self._expr_2,
+                   self._expr_3)

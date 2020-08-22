@@ -11,7 +11,8 @@ class CosPi:
         return f"math.cos(math.pi * {self.expr})"
 
     def eval(self, x, y):
-        return math.cos(math.pi * self.expr.eval(x, y))
+        self._expr = normelize(self.expr.eval(x, y))
+        return math.cos(math.pi * self._expr)
 
 
 class SinPi:
@@ -22,7 +23,8 @@ class SinPi:
         return f"math.sin(math.pi * {self.expr})"
 
     def eval(self, x, y):
-        return math.sin(math.pi * self.expr.eval(x, y))
+        self._expr = normelize(self.expr.eval(x, y))
+        return math.sin(math.pi * self._expr)
 
 
 class Cos2Pi:
@@ -33,7 +35,8 @@ class Cos2Pi:
         return f"math.cos(2 * math.pi * {self.expr})"
 
     def eval(self, x, y):
-        return math.cos(2 * math.pi * self.expr.eval(x, y))
+        self._expr = normelize(self.expr.eval(x, y))
+        return math.cos(2 * math.pi * self._expr)
 
 
 class Sin2Pi:
@@ -44,7 +47,8 @@ class Sin2Pi:
         return f"math.sin(2 * math.pi * {self.expr})"
 
     def eval(self, x, y):
-        return math.sin(2 * math.pi * self.expr.eval(x, y))
+        self._expr = normelize(self.expr.eval(x, y))
+        return math.sin(2 * math.pi * self._expr)
 
 
 class Sin:
@@ -55,7 +59,8 @@ class Sin:
         return f"math.sin({self.expr})"
 
     def eval(self, x, y):
-        return math.sin(self.expr.eval(x, y))
+        self._expr = normelize(self.expr.eval(x, y))
+        return math.sin(self._expr)
 
 
 class Cos:
@@ -66,7 +71,8 @@ class Cos:
         return f"math.cos({self.expr})"
 
     def eval(self, x, y):
-        return math.cos(self.expr.eval(x, y))
+        self._expr = normelize(self.expr.eval(x, y))
+        return math.cos(self._expr)
 
 
 class Dip:
@@ -77,7 +83,8 @@ class Dip:
         return f"dip({self.expr})"
 
     def eval(self, x, y):
-        return dip(self.expr.eval(x, y))
+        self._expr = normelize(self.expr.eval(x, y))
+        return dip(self._expr)
 
 
 class Tip:
@@ -88,7 +95,8 @@ class Tip:
         return f"tip({self.expr})"
 
     def eval(self, x, y):
-        return tip(self.expr.eval(x, y))
+        self._expr = normelize(self.expr.eval(x, y))
+        return tip(self._expr)
 
 
 class Parabola:
@@ -99,7 +107,8 @@ class Parabola:
         return f"parabola({self.expr})"
 
     def eval(self, x, y):
-        return parabola(self.expr.eval(x, y))
+        self._expr = normelize(self.expr.eval(x, y))
+        return parabola(self._expr)
 
 
 class Pow:
@@ -110,7 +119,8 @@ class Pow:
         return f"pow({self.expr})"
 
     def eval(self, x, y):
-        return pow(self.expr.eval(x, y))
+        self._expr = normelize(self.expr.eval(x, y))
+        return pow(self._expr)
 
 
 class Sqrt:
@@ -121,7 +131,8 @@ class Sqrt:
         return f"sqrt({self.expr})"
 
     def eval(self, x, y):
-        return sqrt(self.expr.eval(x, y))
+        self._expr = normelize(self.expr.eval(x, y))
+        return sqrt(self._expr)
 
 
 class Pi:
@@ -132,7 +143,8 @@ class Pi:
         return f"{self.expr} * math.pi"
 
     def eval(self, x, y):
-        return self.expr.eval(x, y) * math.pi
+        self._expr = normelize(self.expr.eval(x, y))
+        return self._expr * math.pi
 
 # Other Ideas #
 

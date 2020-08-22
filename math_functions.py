@@ -31,7 +31,10 @@ def modulo(x1: float, x2: float) -> float:
 
 
 def quotient(x1: float, x2: float) -> float:
-    """Function that returns quotient of x1 devided by x2"""
+    """Function that returns quotient of x1 devided by x2. If x2 is bigger
+       Otherwise it changes the variables around"""
+    if abs(x1) > abs(x2):
+        x1, x2 = x2, x1
     if x2 == 0.0:
         return 0.0
     return x1 / x2
@@ -55,3 +58,11 @@ def mix(x1: float, x2: float, x3: float) -> float:
     """Function that returns a mix of the Inputs"""
     x3 = 0.5 * (x3 + 1.0)
     return x3 * x1 + (1 - x3) * x2
+
+
+def normelize(x: float) -> float:
+    """Function that normelzies a float to -1 to 1"""
+    if -1 < x < 1:
+        return x
+
+    return 1 if x > 1 else -1
