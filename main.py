@@ -13,7 +13,7 @@ def save_expr_file(saved_strings):
             save_file.writelines(img_seg)
 
 
-def create_images(num=1, prob=0.97, size=150, file_path=None):
+def create_images(num=1, prob=0.99, size=150, file_path=None):
     if file_path:
         pass
 
@@ -36,7 +36,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Creates random art")
     parser.add_argument("--num", metavar="Number of images",
-                        type=int, default=1)
+                        type=int, default=50)
     parser.add_argument("--prob", metavar="Probability",
                         type=float, default=0.99)
     parser.add_argument("--size", metavar="Size of image",
