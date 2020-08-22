@@ -13,9 +13,29 @@ def save_expr_file(saved_strings):
             save_file.writelines(img_seg)
 
 
-def create_images(num=1, prob=0.99, size=150, file_path=None):
+def read_file(path):
+    with open(path) as expr_file:
+        lines = expr_file.readlines()
+
+    # Filters Lines with image and blank out
+    def filter_func(x):
+        return True if not x == "\n" and "image" not in x else False
+    lines = list(filter(filter_func, lines))
+
+    # Removes "red: ", "green: ", "blue: " from the start of the line
+    txts_dict = {"r": 5, "g": 7, "b": 6}
+    for i, line in enumerate(lines):
+        lines[i] = line[txts_dict[line[0]]:]
+
+    return lines
+
+
+def create_images(num=50, prob=0.99, size=150, file_path=None):
+    is_file = False
+
     if file_path:
-        pass
+        is_file = True
+        expr_file = read_file(file_path)
 
     saved_strings = []
 
@@ -24,11 +44,14 @@ def create_images(num=1, prob=0.99, size=150, file_path=None):
     for i in range(num):
         image_time = time.time()
 
-        red_expr = build_expr(prob)
-        green_expr = build_expr(prob)
-        blue_expr = build_expr(prob)
+        if file_path:
+            red_expr, green_expr, blue_expr = expr_file[:3]
+        else:
+            red_expr = build_expr(prob)
+            green_expr = build_expr(prob)
+            blue_expr = build_expr(prob)
 
-        image = plot_image(red_expr, green_expr, blue_expr, size)
+        image = plot_image(red_expr, green_expr, blue_expr, size, is_file)
         image.save(f"./images/image{i}.png")
         saved_strings.append([red_expr, green_expr, blue_expr])
 
