@@ -1,7 +1,13 @@
-/_*
-/images/*
+# Folders
+/_
+/__pycache__
+/images
+/.vscode
+/build
+
+# Files
 /Expr*
 /pycall*
-/setup.py
-/speed_tests.ipynb
-/.vscode
+/*.ipynb
+/*.pyd
+/*.c

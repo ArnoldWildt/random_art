@@ -1,3 +1,5 @@
+# from pycallgraph.output import GraphvizOutput
+# from pycallgraph import PyCallGraph
 import argparse
 import time
 
@@ -29,8 +31,8 @@ def creat_images_list(file_path, num, prob):
 def build_img(image_expr, size, num):
     image_time = time.time()
     red_expr, green_expr, blue_expr = image_expr
-    image = ImageGenerator().plot_image(
-        red_expr, green_expr, blue_expr, size)
+    image = ImageGenerator(size).plot_image(
+        red_expr, green_expr, blue_expr)
     image.save(f"./images/image{num}.png")
 
     image_time = round(time.time() - image_time, 2)
@@ -50,8 +52,10 @@ def create_images(num=50, prob=0.99, size=150, file_path=None):
     args_list = list(
         map(lambda img: (img, size, image_list.index(img)), image_list))
 
-    with ProcessPoolExecutor() as exe:
-        exe.map(build_img_, args_list)
+    for arg in args_list:
+        build_img_(arg)
+    # with ProcessPoolExecutor() as exe:
+    #     exe.map(build_img_, args_list)
 
     total_time = round(time.time() - start_time, 2)
     print(f"Done created {num} images! It took {total_time} secs")
@@ -70,4 +74,5 @@ if __name__ == "__main__":
     parser.add_argument("--path", metavar="Expression file path", type=str)
     args = parser.parse_args()
 
+    # with PyCallGraph(output=GraphvizOutput()):
     create_images(*vars(args).values())
