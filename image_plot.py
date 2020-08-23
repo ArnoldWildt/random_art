@@ -1,37 +1,41 @@
-from PIL import Image
-from math_functions import *
-import numpy as np
 import math
 import sys
+import numpy as np
+
+from math_functions import *
+from PIL import Image
 
 
-def create_canvas(expr, size, is_str):
-    canvas = np.zeros((size, size, 1), dtype='uint8')
+class ImageGenerator():
+    def create_canvas(self, expr, size):
+        self.canvas = np.zeros((size, size, 1), dtype='uint8')
 
-    for px in range(size):
-        for py in range(size):
+        for pair in self.xy_gen(size):
+            self.eval_func(expr, size, *pair)
 
-            # Normalize to (-1 - 1)
-            x = float(px - (size / 2)) / (size / 2)
-            y = -float(py - (size / 2)) / (size / 2)
+        return np.rot90(self.canvas, k=3)
 
-            if is_str:
-                z = eval(expr)
-            else:
-                z = expr.eval(x, y)
+    def xy_gen(self, size):
+        for x in range(size):
+            for y in range(size):
+                yield (x, y)
 
-            # Scale to (0 - 255).
-            intensity = z * 127.5 + 127.5
+    def eval_func(self, expr, size, px, py):
+        # Normalize to (-1 - 1)
+        x = float(px - (size / 2)) / (size / 2)
+        y = -float(py - (size / 2)) / (size / 2)
 
-            canvas[px][py] = int(intensity)
+        z = eval(expr) if isinstance(expr, type(str())) else expr.eval(x, y)
 
-    return np.rot90(canvas, k=3)
+        # Scale to (0 - 255).
+        intensity = z * 127.5 + 127.5
 
+        self.canvas[px][py] = int(intensity)
 
-def plot_image(red_expr, green_expr, blue_expr, size, is_str=False):
-    red_canvas = create_canvas(red_expr, size, is_str)
-    green_canvas = create_canvas(green_expr, size, is_str)
-    blue_canvas = create_canvas(blue_expr, size, is_str)
-    rgb_canvas = np.concatenate(
-        (red_canvas, green_canvas, blue_canvas), axis=2)
-    return Image.fromarray(rgb_canvas)
+    def plot_image(self, red_expr, green_expr, blue_expr, size):
+        red_canvas = self.create_canvas(red_expr, size)
+        green_canvas = self.create_canvas(green_expr, size)
+        blue_canvas = self.create_canvas(blue_expr, size)
+        rgb_canvas = np.concatenate(
+            (red_canvas, green_canvas, blue_canvas), axis=2)
+        return Image.fromarray(rgb_canvas)
