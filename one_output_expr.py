@@ -1,6 +1,6 @@
 import expr_functions as ex
+from c_math import *
 from math_functions import *
-import math
 
 
 class CosPi:
@@ -8,11 +8,11 @@ class CosPi:
         self.expr = ex.build_expr(prob * prob)
 
     def __repr__(self):
-        return f"math.cos(math.pi * {self.expr})"
+        return f"c_cos(c_pi() * {self.expr})"
 
     def eval(self, x, y):
         self._expr = normelize(self.expr.eval(x, y))
-        return math.cos(math.pi * self._expr)
+        return c_cos(c_pi() * self._expr)
 
 
 class SinPi:
@@ -20,11 +20,11 @@ class SinPi:
         self.expr = ex.build_expr(prob * prob)
 
     def __repr__(self):
-        return f"math.sin(math.pi * {self.expr})"
+        return f"c_sin(c_pi() * {self.expr})"
 
     def eval(self, x, y):
         self._expr = normelize(self.expr.eval(x, y))
-        return math.sin(math.pi * self._expr)
+        return c_sin(c_pi() * self._expr)
 
 
 class Cos2Pi:
@@ -32,11 +32,11 @@ class Cos2Pi:
         self.expr = ex.build_expr(prob * prob)
 
     def __repr__(self):
-        return f"math.cos(2 * math.pi * {self.expr})"
+        return f"c_cos(2 * c_pi() * {self.expr})"
 
     def eval(self, x, y):
         self._expr = normelize(self.expr.eval(x, y))
-        return math.cos(2 * math.pi * self._expr)
+        return c_cos(2 * c_pi() * self._expr)
 
 
 class Sin2Pi:
@@ -44,11 +44,11 @@ class Sin2Pi:
         self.expr = ex.build_expr(prob * prob)
 
     def __repr__(self):
-        return f"math.sin(2 * math.pi * {self.expr})"
+        return f"c_sin(2 * c_pi() * {self.expr})"
 
     def eval(self, x, y):
         self._expr = normelize(self.expr.eval(x, y))
-        return math.sin(2 * math.pi * self._expr)
+        return c_sin(2 * c_pi() * self._expr)
 
 
 class Sin:
@@ -56,11 +56,11 @@ class Sin:
         self.expr = ex.build_expr(prob * prob)
 
     def __repr__(self):
-        return f"math.sin({self.expr})"
+        return f"c_sin({self.expr})"
 
     def eval(self, x, y):
         self._expr = normelize(self.expr.eval(x, y))
-        return math.sin(self._expr)
+        return c_sin(self._expr)
 
 
 class Cos:
@@ -68,11 +68,11 @@ class Cos:
         self.expr = ex.build_expr(prob * prob)
 
     def __repr__(self):
-        return f"math.cos({self.expr})"
+        return f"c_cos({self.expr})"
 
     def eval(self, x, y):
         self._expr = normelize(self.expr.eval(x, y))
-        return math.cos(self._expr)
+        return c_cos(self._expr)
 
 
 class Dip:
@@ -140,11 +140,11 @@ class Pi:
         self.expr = ex.build_expr(prob * prob)
 
     def __repr__(self):
-        return f"{self.expr} * math.pi"
+        return f"{self.expr} * c_pi()"
 
     def eval(self, x, y):
         self._expr = normelize(self.expr.eval(x, y))
-        return self._expr * math.pi
+        return self._expr * c_pi()
 
 # Other Ideas #
 

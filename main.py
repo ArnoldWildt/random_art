@@ -52,10 +52,12 @@ def create_images(num=50, prob=0.99, size=150, file_path=None):
     args_list = list(
         map(lambda img: (img, size, image_list.index(img)), image_list))
 
-    for arg in args_list:
-        build_img_(arg)
-    # with ProcessPoolExecutor() as exe:
-    #     exe.map(build_img_, args_list)
+    # No Multicprocess
+    # for arg in args_list:
+    #     build_img_(arg)
+
+    with ProcessPoolExecutor() as exe:
+        exe.map(build_img_, args_list)
 
     total_time = round(time.time() - start_time, 2)
     print(f"Done created {num} images! It took {total_time} secs")

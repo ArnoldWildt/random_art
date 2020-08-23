@@ -1,10 +1,10 @@
 # cython: cdivision=True, language_level=3
 
-import math
 import sys
 import numpy as np
 cimport numpy as np
 
+from c_math import *
 from math_functions import *
 from PIL import Image
 
