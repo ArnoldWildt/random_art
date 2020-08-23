@@ -3,41 +3,58 @@ import time
 
 from expr_functions import build_expr
 from files import *
-from image_plot import plot_image
+from image_plot import ImageGenerator
+from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
+
+
+def creat_images_list(file_path, num, prob):
+    image_list = []
+
+    if file_path:
+        expr_file = read_file(file_path)
+        for i in range(int(len(expr_file) / 3)):
+            image_list.append(expr_file[:3])
+            expr_file = expr_file[3:]
+        return image_list
+
+    for i in range(num):
+        red_expr = build_expr(prob)
+        green_expr = build_expr(prob)
+        blue_expr = build_expr(prob)
+        image_list.append([red_expr, green_expr, blue_expr])
+        save_expr_file(image_list)
+    return image_list
+
+
+def build_img(image_expr, size, num):
+    image_time = time.time()
+    red_expr, green_expr, blue_expr = image_expr
+    image = ImageGenerator().plot_image(
+        red_expr, green_expr, blue_expr, size)
+    image.save(f"./images/image{num}.png")
+
+    image_time = round(time.time() - image_time, 2)
+    print(f"image{num}.png created! It took {image_time} secs")
+
+
+def build_img_(args):
+    return build_img(*args)
 
 
 def create_images(num=50, prob=0.99, size=150, file_path=None):
-    is_file = False
-
-    if file_path:
-        is_file = True
-        expr_file = read_file(file_path)
-
-    saved_strings = []
-
     start_time = time.time()
+    image_list = creat_images_list(file_path, num, prob)
 
-    for i in range(num):
-        image_time = time.time()
+    # Combine image_expr ,size and image_number
+    # to use it with ProcessPoolExecutor
+    args_list = list(
+        map(lambda img: (img, size, image_list.index(img)), image_list))
 
-        if file_path:
-            red_expr, green_expr, blue_expr = expr_file[:3]
-        else:
-            red_expr = build_expr(prob)
-            green_expr = build_expr(prob)
-            blue_expr = build_expr(prob)
-
-        image = plot_image(red_expr, green_expr, blue_expr, size, is_file)
-        image.save(f"./images/image{i}.png")
-        saved_strings.append([red_expr, green_expr, blue_expr])
-
-        image_time = round(time.time() - image_time, 2)
-        print(f"image{i}.png created! It took {image_time} secs")
+    with ProcessPoolExecutor() as exe:
+        exe.map(build_img_, args_list)
 
     total_time = round(time.time() - start_time, 2)
     print(f"Done created {num} images! It took {total_time} secs")
-
-    save_expr_file(saved_strings)
 
 
 if __name__ == "__main__":
