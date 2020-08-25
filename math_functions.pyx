@@ -16,7 +16,9 @@ cpdef float parabola(float x):
 
 
 cpdef float pow(float x):
-    """Function that returns x to the power of x."""
+    """Function that returns x to the power of x. If x not between -1, 1 x = 0"""
+    if not -1 < x < 1:
+        return 0
     return abs(x) ** x
 
 

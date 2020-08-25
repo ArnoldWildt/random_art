@@ -11,8 +11,7 @@ class CosPi:
         return f"c_cos(c_pi() * {self.expr})"
 
     def eval(self, x, y):
-        self._expr = normelize(self.expr.eval(x, y))
-        return c_cos(c_pi() * self._expr)
+        return c_cos(c_pi() * self.expr.eval(x, y))
 
 
 class SinPi:
@@ -23,8 +22,7 @@ class SinPi:
         return f"c_sin(c_pi() * {self.expr})"
 
     def eval(self, x, y):
-        self._expr = normelize(self.expr.eval(x, y))
-        return c_sin(c_pi() * self._expr)
+        return c_sin(c_pi() * self.expr.eval(x, y))
 
 
 class Cos2Pi:
@@ -35,8 +33,7 @@ class Cos2Pi:
         return f"c_cos(2 * c_pi() * {self.expr})"
 
     def eval(self, x, y):
-        self._expr = normelize(self.expr.eval(x, y))
-        return c_cos(2 * c_pi() * self._expr)
+        return c_cos(2 * c_pi() * self.expr.eval(x, y))
 
 
 class Sin2Pi:
@@ -47,8 +44,7 @@ class Sin2Pi:
         return f"c_sin(2 * c_pi() * {self.expr})"
 
     def eval(self, x, y):
-        self._expr = normelize(self.expr.eval(x, y))
-        return c_sin(2 * c_pi() * self._expr)
+        return c_sin(2 * c_pi() * self.expr.eval(x, y))
 
 
 class Sin:
@@ -59,8 +55,7 @@ class Sin:
         return f"c_sin({self.expr})"
 
     def eval(self, x, y):
-        self._expr = normelize(self.expr.eval(x, y))
-        return c_sin(self._expr)
+        return c_sin(self.expr.eval(x, y))
 
 
 class Cos:
@@ -71,8 +66,7 @@ class Cos:
         return f"c_cos({self.expr})"
 
     def eval(self, x, y):
-        self._expr = normelize(self.expr.eval(x, y))
-        return c_cos(self._expr)
+        return c_cos(self.expr.eval(x, y))
 
 
 class Dip:
@@ -83,8 +77,7 @@ class Dip:
         return f"dip({self.expr})"
 
     def eval(self, x, y):
-        self._expr = normelize(self.expr.eval(x, y))
-        return dip(self._expr)
+        return dip(self.expr.eval(x, y))
 
 
 class Tip:
@@ -95,8 +88,7 @@ class Tip:
         return f"tip({self.expr})"
 
     def eval(self, x, y):
-        self._expr = normelize(self.expr.eval(x, y))
-        return tip(self._expr)
+        return tip(self.expr.eval(x, y))
 
 
 class Parabola:
@@ -107,8 +99,7 @@ class Parabola:
         return f"parabola({self.expr})"
 
     def eval(self, x, y):
-        self._expr = normelize(self.expr.eval(x, y))
-        return parabola(self._expr)
+        return parabola(self.expr.eval(x, y))
 
 
 class Pow:
@@ -119,8 +110,7 @@ class Pow:
         return f"pow({self.expr})"
 
     def eval(self, x, y):
-        self._expr = normelize(self.expr.eval(x, y))
-        return pow(self._expr)
+        return pow(self.expr.eval(x, y))
 
 
 class Sqrt:
@@ -131,8 +121,7 @@ class Sqrt:
         return f"sqrt({self.expr})"
 
     def eval(self, x, y):
-        self._expr = normelize(self.expr.eval(x, y))
-        return sqrt(self._expr)
+        return sqrt(self.expr.eval(x, y))
 
 
 class Pi:
@@ -143,24 +132,81 @@ class Pi:
         return f"{self.expr} * c_pi()"
 
     def eval(self, x, y):
-        self._expr = normelize(self.expr.eval(x, y))
-        return self._expr * c_pi()
+        return self.expr.eval(x, y) * c_pi()
 
-# Other Ideas #
 
-# class Jitter growing "x*sin(x)""
-# class hearth "x^2+(y-3root(x^2))^2 = 1"
-# class high peak mid "sin(x)/x"
-# tan(x)/sin(x) loops
-# atan(x) midpoint
-# tanh(x)
-# 'pi*(x**2 + y**2)',  # circle
-# 'sin(x)',  # gradient horizontal
-# 'cos(x)',  # gradient horizontal center-hollow
-# 'cos(x)+sin(x)',
-# 'abs(x)',
-# '2*x**2*y**2',  # corner circles
-# 'x**5*y**2+3*x*3+2*x**2+x**4',  # thick gradient
-# 'exp(pi*sin(x))',  # lighter gradient than sin(x)
-# 'sin(pi*x)*cos(x)*pi*(y**2 + y**2)',  # reflecting half circles
-# 'sin(2*x**2*y**2)',
+class Jitter:
+    def __init__(self, prob):
+        self.expr = ex.build_expr(prob * prob)
+
+    def __repr__(self):
+        return f"{self.expr} * c_sin({self.expr})"
+
+    def eval(self, x, y):
+        return self.expr.eval(x, y) * c_sin(self.expr.eval(x, y))
+
+
+class Peak:
+    def __init__(self, prob):
+        self.expr = ex.build_expr(prob * prob)
+
+    def __repr__(self):
+        return f"quotient(c_sin({self.expr}), {self.expr})"
+
+    def eval(self, x, y):
+        return quotient(c_sin(self.expr.eval(x, y)), self.expr.eval(x, y))
+
+
+class Loops:
+    def __init__(self, prob):
+        self.expr = ex.build_expr(prob * prob)
+
+    def __repr__(self):
+        return f"quotient(c_tan({self.expr}),c_sin({self.expr}))"
+
+    def eval(self, x, y):
+        return quotient(c_tan(self.expr.eval(x, y)), c_sin(self.expr.eval(x, y)))
+
+
+class MidPoint:
+    def __init__(self, prob):
+        self.expr = ex.build_expr(prob * prob)
+
+    def __repr__(self):
+        return f"c_atan({self.expr})"
+
+    def eval(self, x, y):
+        return c_atan(self.expr.eval(x, y))
+
+
+class Curve:
+    def __init__(self, prob):
+        self.expr = ex.build_expr(prob * prob)
+
+    def __repr__(self):
+        return f"c_tanh({self.expr})"
+
+    def eval(self, x, y):
+        return c_tanh(self.expr.eval(x, y))
+
+
+class Absolut:
+    def __init__(self, prob):
+        self.expr = ex.build_expr(prob * prob)
+
+    def __repr__(self):
+        return f"abs({self.expr})"
+
+    def eval(self, x, y):
+        return abs(self.expr.eval(x, y))
+
+
+class Waves:
+    def __init__(self, prob):
+        self.expr = ex.build_expr(prob * prob)
+
+    def __repr__(self):
+        return f"abs({self.expr})"
+
+    def eval(self, x, y):
+        return c_exp(c_pi()*c_sin(self.expr.eval(x, y)))
