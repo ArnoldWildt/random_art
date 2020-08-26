@@ -51,11 +51,11 @@ def create_images(num, prob, size, file_path):
         map(lambda img: (img, size, image_list.index(img)), image_list))
 
     # No Multicprocess
-    for arg in args_list:
-        build_img_(arg)
+    # for arg in args_list:
+    #     build_img_(arg)
 
-    # with ProcessPoolExecutor() as exe:
-    #     exe.map(build_img_, args_list)
+    with ProcessPoolExecutor() as exe:
+        exe.map(build_img_, args_list)
 
     if file_path:
         num = len(args_list)
