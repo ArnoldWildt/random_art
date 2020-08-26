@@ -9,5 +9,4 @@
 /Expr*
 /pycall*
 /*.ipynb
-/*.pyd
 /*.c
