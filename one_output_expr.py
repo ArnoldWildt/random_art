@@ -165,7 +165,8 @@ class Loops:
         return f"quotient(c_tan({self.expr}),c_sin({self.expr}))"
 
     def eval(self, x, y):
-        return quotient(c_tan(self.expr.eval(x, y)), c_sin(self.expr.eval(x, y)))
+        return quotient(c_tan(self.expr.eval(x, y)),
+                        c_sin(self.expr.eval(x, y)))
 
 
 class MidPoint:
