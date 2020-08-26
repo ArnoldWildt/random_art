@@ -44,11 +44,11 @@ Compile Cython files if Python version is not 3.7:
 
 This will create the example pictures above
 
-`python main.py --size 100 --path ./demo_expr.txt`
+`$ python main.py --size 100 --path ./demo_expr.txt`
 
 This will create 10 new random pictures
 
-`python main.py --size 150 --num 10`
+`$ python main.py --size 150 --num 10`
 
 ```
 usage: main.py [-h] [--num Number of images] [--prob Probability]
