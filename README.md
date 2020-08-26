@@ -4,9 +4,10 @@
 
 ---
 
-[![Example Image](./images/image0.png)]()
+<img src="./images/image0.png" width="150">
 
 Math Expressions for above image
+
 _red:_
 
 ```
@@ -25,23 +26,20 @@ _blue:_
 mix((c_sin(avg(c_sin(1), c_sin(2 * c_pi() * c_sin(c_pi() * y)))) * x), pow(c_cos(2 * c_pi() * x)), quotient(c_sin(c_sin(2 * c_pi() * 0.5599369560473466) * c_pi()), c_sin(c_pi() * c_cos(c_cos(c_sin(0.0032596001697566823)))))) * c_pi()
 ```
 
-[![Example Image](./images/image1.png)]()
-[![Example Image](./images/image2.png)]()
-[![Example Image](./images/image3.png)]()
-[![Example Image](./images/image4.png)]()
-[![Example Image](./images/image5.png)]()
-[![Example Image](./images/image6.png)]()
-[![Example Image](./images/image7.png)]()
-[![Example Image](./images/image8.png)]()
-[![Example Image](./images/image9.png)]()
-[![Example Image](./images/image10.png)]()
+### A few example images:
+
+<img src="./images/image1.png" width="150"> <img src="./images/image2.png" width="150"> <img src="./images/image3.png" width="150"> <img src="./images/image4.png" width="150"> <img src="./images/image5.png" width="150"> 
+<img src="./images/image6.png" width="150"> <img src="./images/image7.png" width="150"> <img src="./images/image8.png" width="150"> <img src="./images/image9.png" width="150"> <img src="./images/image10.png" width="150">
 
 ## Setup
 
 Install numpy and Pillow:
+
 `$ pip install -r requirements.txt`
 
+
 (Optional) Compile Cython files:
+
 `$ python setup.py build_ext --inplace`
 
 ---
@@ -49,9 +47,12 @@ Install numpy and Pillow:
 ## Usage (Optional)
 
 This will create the example pictures above
+
 `python main.py --size 100 --path ./demo_expr.txt`
 
+
 This will create 10 new random pictures
+
 `python main.py --size 150 --num 10`
 
 ```
