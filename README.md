@@ -8,8 +8,6 @@
 
 Math Expressions for above image
 
-
-
 ```
 red:
 
@@ -26,16 +24,15 @@ mix((c_sin(avg(c_sin(1), c_sin(2 * c_pi() * c_sin(c_pi() * y)))) * x), pow(c_cos
 
 ### A few example images:
 
-<img align="center" src="./images/image1.png" width="150"> <img align="center" src="./images/image2.png" width="150"> <img align="center" src="./images/image3.png" width="150"> <img align="center" src="./images/image4.png" width="150"> <img align="center" src="./images/image5.png" width="150"> 
+<img align="center" src="./images/image1.png" width="150"> <img align="center" src="./images/image2.png" width="150"> <img align="center" src="./images/image3.png" width="150"> <img align="center" src="./images/image4.png" width="150"> <img align="center" src="./images/image5.png" width="150">
 
 <img align="center" src="./images/image6.png" width="150"> <img align="center" src="./images/image7.png" width="150"> <img align="center" src="./images/image8.png" width="150"> <img align="center" src="./images/image9.png" width="150"> <img align="center" src="./images/image10.png" width="150">
 
 ## Setup
 
-Install numpy and Pillow:
+Install numpy, cython and pillow:
 
 `$ pip install -r requirements.txt`
-
 
 (Optional) Compile Cython files:
 
@@ -48,7 +45,6 @@ Install numpy and Pillow:
 This will create the example pictures above
 
 `python main.py --size 100 --path ./demo_expr.txt`
-
 
 This will create 10 new random pictures
 
