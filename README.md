@@ -34,7 +34,7 @@ Install numpy, cython and pillow:
 
 `$ pip install -r requirements.txt`
 
-(Optional) Compile Cython files:
+Compile Cython files if Python version is not 3.7:
 
 `$ python setup.py build_ext --inplace`
 
