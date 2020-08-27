@@ -1,10 +1,10 @@
 import argparse
 import time
 
-from expr_functions import build_expr
-from files import *
-from image_plot import ImageGenerator
 from concurrent.futures import ProcessPoolExecutor
+from random_art.expr_functions import build_expr
+from random_art.files import *
+from random_art.image_plot import ImageGenerator
 
 
 def creat_images_list(file_path, num, prob):

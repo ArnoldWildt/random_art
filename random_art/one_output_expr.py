@@ -1,6 +1,6 @@
-import expr_functions as ex
-from c_math import *
-from math_functions import *
+import random_art.expr_functions as ex
+from random_art.c_math import *
+from random_art.math_functions import *
 
 
 class CosPi:

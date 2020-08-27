@@ -1,6 +1,6 @@
 import random
-import expr_functions as ex
-from math_functions import *
+import random_art.expr_functions as ex
+from random_art.math_functions import *
 
 
 class Product:

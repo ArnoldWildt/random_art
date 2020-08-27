@@ -1,8 +1,8 @@
 import sys
 import numpy as np
 
-from c_math import *
-from math_functions import *
+from random_art.c_math import *
+from random_art.math_functions import *
 from PIL import Image
 
 

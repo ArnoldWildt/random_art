@@ -1,11 +1,11 @@
 # Folders
-/_
-/__pycache__
-/.vscode
-/build
+_
+__pycache__
+.vscode
+build
 
 # Files
-/Expr*
-/pycall*
-/*.ipynb
-/*.c
+Expr*
+pycall*
+*.ipynb
+*.c

@@ -2,7 +2,7 @@ from datetime import date
 
 
 def save_expr_file(saved_strings):
-    with open(f"Expr_strings_{date.today()}.txt", "w") as save_file:
+    with open(f"./expressions/Expr_strings_{date.today()}.txt", "w") as save_file:
         for i, saved_string in enumerate(saved_strings):
             r, g, b = saved_string
             img_seg = f"image{i}\nred: {r}\ngreen: {g}\nblue: {b}\n\n"
