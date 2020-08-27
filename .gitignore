@@ -5,7 +5,7 @@ __pycache__
 build
 
 # Files
-Expr*
+Expr_*
 pycall*
 *.ipynb
 *.c
